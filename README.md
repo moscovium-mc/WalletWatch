@@ -1,40 +1,72 @@
 # WalletWatch
 
-WalletWatch is a Python script that fetches Bitcoin wallet transaction data from the Blockchain API and displays the wallet's transaction information, including the number of transactions, total received, total sent, and current balance in BTC.
+A Python tool for analyzing Bitcoin wallet addresses using public blockchain data.
 
 ## Features
 
-- Fetch wallet data using the Blockchain API.
-- Display wallet information in a clean and simple format.
-- Allows users to enter multiple wallet addresses and view transaction details for each one.
-- Calculates the total received, total sent, and balance in BTC (converted from satoshis).
+- View wallet balance and transaction history
+- Real-time BTC to USD/EUR conversion
+- Display recent transactions with timestamps
+- Smart caching to reduce API calls
+- Automatic retry on network failures
+- Rate limiting protection
 
 ## Requirements
 
-- Python 3.x
+- Python 3.7+
 - `requests` library
 
 ## Installation
 
-1. Download or clone the repo:
+Install dependencies:
+```bash
+pip install requests
+```
 
 ## Usage
-Run the script using Python:
+
+Run the script:
 ```bash
 python walletwatch.py
 ```
 
-## Example
-Enter wallet address: 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa
+Enter a Bitcoin address when prompted and choose how many recent transactions to display (0-50).
 
-Wallet Address: 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa
-Transactions: 100
-Total Received: 10.00000000 BTC
-Total Sent: 5.00000000 BTC
-Balance: 5.00000000 BTC
+## Example Output
 
-Would you like to search for another wallet? (y/n): n
-[+] Goodbye!
+```
+======================================================================
+₿  Bitcoin Wallet Summary
+======================================================================
+Address:       1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa
+Transactions:  2,847
+----------------------------------------------------------------------
+Total Received:     68.48120000 BTC
+Total Sent:          0.00000000 BTC
+Total Volume:       68.48120000 BTC
+----------------------------------------------------------------------
+Current Balance:    68.48120000 BTC
+                  3,042,453.20 USD
+                  2,847,891.50 EUR
+
+Market Price: 1 BTC = $44,425.00 USD / €41,585.00 EUR
+======================================================================
+Recent Transactions (last 5)
+----------------------------------------------------------------------
+2024-01-15 14:23 | IN  |  +0.05000000 BTC | Bal:  0.05000000 BTC
+2024-01-10 09:15 | IN  |  +0.10000000 BTC | Bal:  0.10000000 BTC
+...
+======================================================================
+```
+
+## How It Works
+
+- Fetches wallet data from Blockchain.info API
+- Gets current BTC prices from CoinGecko API
+- Caches results to minimize API calls
+- Automatically retries failed requests
+- Respects API rate limits
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+
+MIT License - see LICENSE file for details.
